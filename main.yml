@@ -1,11 +1,16 @@
-name: Hello World
+name: Hello World With Input
 
 on:
-  workflow_dispatch:  # allows manual trigger
+  workflow_dispatch:
+    inputs:
+      message:
+        description: "Message to print"
+        required: true
+        default: "hello world"
 
 jobs:
   say-hello:
     runs-on: ubuntu-latest
     steps:
-      - name: Print message
-        run: echo "hello world"
+      - name: Print input message
+        run: echo "${{ github.event.inputs.message }}"
